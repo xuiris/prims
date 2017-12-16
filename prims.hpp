@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <vector>
 #include <utility>
+#include <iostream>
+using namespace std;
 
 struct Minheap {
     vector<pair<int, int>> h; // pair: <key, node>

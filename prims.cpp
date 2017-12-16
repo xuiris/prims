@@ -17,7 +17,7 @@ int Minheap::parent(int i) {
 }
 
 int Minheap::left(int i) {
-    x = (2*i)+1;
+    int x = (2*i)+1;
     if (x < h.size()) {
         return x;
     }
@@ -25,7 +25,7 @@ int Minheap::left(int i) {
 }
 
 int Minheap::right(int i) {
-    x = (2*1)+2;
+    int x = (2*1)+2;
     if (x < h.size()) {
         return x;
     }
@@ -37,7 +37,7 @@ void Minheap::percdown(int i) {
     while ((right(i) != -1) && ((h[i].first > h[left(i)].first) || (h[i].first > h[right(i)].first)))  {
         temp = h[i];
         if (h[left(i)].first < h[right(i)].first) {
-            h[i] = h[left(i)].first;
+            h[i] = h[left(i)];
             h[left(i)] = temp;
             i = left(i);
         }
@@ -49,7 +49,7 @@ void Minheap::percdown(int i) {
     }
     if ((left(i) != -1) && (h[i].first > h[left(i)].first)) {
         temp = h[i];
-        h[i] = h[left(i)].first;
+        h[i] = h[left(i)];
         h[left(i)] = temp;
     }
     return;
@@ -67,14 +67,15 @@ void Minheap::percup(int i) {
 
 void Minheap::heapify() {
     int i = h.size()/2;
-    for (int i = h.size()/2; i < 0; i--) {
+    for (int i = h.size()/2; i >= 0; i--) {
         percdown(i);
     }
 }
 
 void Minheap::printheap() {
-    for (int i = 0; i < h.size; i++) {
-        cout << h[i].first;
+    for (int i = 0; i < h.size(); i++) {
+        cout << h[i].first << " ";
     }
+    cout << endl;
 }
 

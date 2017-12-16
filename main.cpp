@@ -12,6 +12,7 @@
 #include <utility>
 #include <iostream>
 #include <sstream>
+#include "prims.hpp"
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -20,7 +21,7 @@ int main(int argc, char* argv[]) {
         std::string command;
         ss >> command;
         // put integers into a vector
-        std::vector<pair<int, int> v = {};
+        std::vector<pair<int, int>> v = {};
         if (command == "MINHEAP") {
             for(std::string num; ss >> num;) {
                 int n = stoi(num);
@@ -32,6 +33,9 @@ int main(int argc, char* argv[]) {
             heap.printheap();
             heap.percdown(heap.h.size()/2);
             heap.printheap();
+            heap.heapify();
+            heap.printheap();
         }
     }
-                
+}
+               
