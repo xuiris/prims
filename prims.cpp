@@ -9,48 +9,36 @@
 #include "prims.hpp"
 
 int Minheap::parent(int i) {
-    int x = (i-1)/2;
-    if (x < 0) {
-        return x;
-    }
-    else return -1;
+    return (i-1)/2;
 }
 
-int Minheap::left(int i) {
-    int x = (2*i)+1;
-    if (x < h.size()) {
-        return x;
-    }
-    else return -1;
+int Minheap::lft(int i) {
+    return (2*i)+1;
 }
 
-int Minheap::right(int i) {
-    int x = (2*1)+2;
-    if (x < h.size()) {
-        return x;
-    }
-    else return -1;
+int Minheap::rght(int i) {
+    return (2*i)+2;
 }
 
 void Minheap::percdown(int i) {
     pair<int, int> temp;
-    while ((right(i) != -1) && ((h[i].first > h[left(i)].first) || (h[i].first > h[right(i)].first)))  {
+    while ((rght(i) < h.size()) && ((h[i].first > h[lft(i)].first) || (h[i].first > h[rght(i)].first)))  {
         temp = h[i];
-        if (h[left(i)].first < h[right(i)].first) {
-            h[i] = h[left(i)];
-            h[left(i)] = temp;
-            i = left(i);
+        if (h[lft(i)].first < h[rght(i)].first) {
+            h[i] = h[lft(i)];
+            h[lft(i)] = temp;
+            i = lft(i);
         }
         else {
-            h[i] = h[right(i)];
-            h[right(i)] = temp;
-            i = right(i);
+            h[i] = h[rght(i)];
+            h[rght(i)] = temp;
+            i = rght(i);
         }
     }
-    if ((left(i) != -1) && (h[i].first > h[left(i)].first)) {
+    if ((lft(i) < h.size()) && (h[i].first > h[lft(i)].first)) {
         temp = h[i];
-        h[i] = h[left(i)];
-        h[left(i)] = temp;
+        h[i] = h[lft(i)];
+        h[lft(i)] = temp;
     }
     return;
 }
@@ -66,8 +54,7 @@ void Minheap::percup(int i) {
 }
 
 void Minheap::heapify() {
-    int i = h.size()/2;
-    for (int i = h.size()/2; i >= 0; i--) {
+    for (int i = (h.size())/2; i >= 0; i--) {
         percdown(i);
     }
 }
@@ -76,6 +63,16 @@ void Minheap::printheap() {
     for (int i = 0; i < h.size(); i++) {
         cout << h[i].first << " ";
     }
-    cout << endl;
+}
+
+void Minheap::delmin() {
+    if (h.size() == 1) {
+        h.clear();
+    }
+    else {
+        h[0] = h[h.size()-1];
+        h.erase(h.end()-1);
+        percdown(0);
+    }
 }
 

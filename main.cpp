@@ -30,11 +30,17 @@ int main(int argc, char* argv[]) {
             }
             Minheap heap;
             heap.h = v;
-            heap.printheap();
             heap.percdown(heap.h.size()/2);
             heap.printheap();
+            cout << endl;
             heap.heapify();
             heap.printheap();
+            cout << endl;
+            heap.delmin();
+            heap.delmin();
+            heap.delmin();
+            heap.printheap();
+            cout<< endl;
         }
     }
 }

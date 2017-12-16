@@ -18,12 +18,13 @@ using namespace std;
 struct Minheap {
     vector<pair<int, int>> h; // pair: <key, node>
     int parent(int i);
-    int left(int i);
-    int right(int i);
+    int lft(int i);
+    int rght(int i);
     void percdown(int i);
     void percup(int i);
     void heapify();
     void printheap();
+    void delmin();
 };
 
 
