@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
                 int t = stoi(to);
                 int c = stoi(cost);
                 // add to heap: (check if the node exists yet in the adj list)
-                if (alist.count(f) == 0) {
+                if (alist.adj.count(f) == 0) {
                     if (f == 1) {
                         heap.h[i] = make_pair(0, 1);
                     }
@@ -73,12 +73,11 @@ int main(int argc, char* argv[]) {
                 alist.adj[f][t] = c;
                 alist.adj[t][f] = c;
             }
+            cout << alist.firstcost() << endl;
+            MST mytree = prims(heap, alist);
+            mytree.printmst();
+            cout << endl;
         }
-        cout << alist.firstcost() << endl;
-        MST mytree = prims(heap, alist);
-        mytree.printmst();
-        cout << endl;
-        
     }
 }
                
