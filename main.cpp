@@ -46,7 +46,6 @@ int main(int argc, char* argv[]) {
         if (command == "PRIM") {
             Minheap heap;
             AdjList alist;
-            int i = 0;
             // put all the triples (node node cost) into adjlists and heap
             for(string frm, to, cost; ss >> frm >> to >> cost;) {
                 int f = stoi(frm);
@@ -55,27 +54,21 @@ int main(int argc, char* argv[]) {
                 // add to heap: (check if the node exists yet in the adj list)
                 if (alist.adj.count(f) == 0) {
                     if (f == 1) {
-                        pair<int,int> p = make_pair(0,1);
-                        heap.h[i] = p;
+                        heap.h.push_back(make_pair(0,1));
                     }
                     else {
-                        pair<int,int> p = make_pair(std::numeric_limits<int>::max(), f);
-                        heap.h[i] = p;
+                        heap.h.push_back(make_pair(std::numeric_limits<int>::max(), f));
                     }
-                    heap.index[f] = i; // keep track of indexing
-                    i++;
+                    heap.index[f] = heap.h.size()-1; // keep track of indexing
                 }
                 if (alist.adj.count(t) == 0) {
                     if (t == 1) {
-                        pair<int,int> p = make_pair(0,1);
-                        heap.h[i] = p;
+                        heap.h.push_back(make_pair(0,1));
                     }
                     else {
-                        pair<int,int> p = make_pair(std::numeric_limits<int>::max(), t);
-                        heap.h[i] = p;
+                        heap.h.push_back(make_pair(std::numeric_limits<int>::max(), t));
                     }
-                    heap.index[t] = i; // keep track of indexing
-                    i++;
+                    heap.index[t] = heap.h.size()-1; // keep track of indexing
                 }
                 // add to adj list:
                 alist.adj[f][t] = c;
