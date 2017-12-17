@@ -41,9 +41,42 @@ int main(int argc, char* argv[]) {
             heap.delmin();
             heap.printheap();
             cout<< endl;
-            
-            // Testing repo
         }
+        if (command == "PRIMS") {
+            Minheap heap;
+            AdjList alist;
+            // put all the triples (node node cost) into adjlists and heap
+            for(string frm, string to, string cost, int i = 0; ss >> frm >> to >> cost;) {
+                int f = stoi(frm);
+                int t = stoi(to);
+                int c = stoi(cost);
+                // add to heap: (check if the node exists yet in the adj list)
+                if (alist.count(f) == 0) {
+                    if (f == 1) {
+                        heap.h[i] = (0, 1);
+                    }
+                    else heap.h[i] = (infinity, f);
+                    index[f] = i; // keep track of indexing
+                    i++;
+                }
+                if (alist.count(t) == 0) {
+                    if (t == 1) {
+                        heap.h[i] = (0, 1);
+                    }
+                    else heap.h[i] = (infinity, t);
+                    index[t] = i; // keep track of indexing
+                    i++;
+                }
+                // add to adj list:
+                alist.adj[f] = (t, c);
+                alist.adj[t] = (f, c);
+            }
+        }
+        cout << alist.firstcost() << endl;
+        MST mytree = prims(heap, alist);
+        mytree.printmst();
+        cout << endl;
+        
     }
 }
                

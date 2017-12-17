@@ -12,33 +12,37 @@ int Minheap::parent(int i) {
     return (i-1)/2;
 }
 
-int Minheap::lft(int i) {
+int Minheap::left(int i) {
     return (2*i)+1;
 }
 
-int Minheap::rght(int i) {
+int Minheap::right(int i) {
     return (2*i)+2;
 }
 
+void swap(int a, int b) {
+    //swap
+    pair<int, int> temp = h[a];
+    h[a] = h[b];
+    h[b] = h[a];
+    //update index
+    index[h[a].second] = a;
+    index[h[b].second] = b;
+}
+
 void Minheap::percdown(int i) {
-    pair<int, int> temp;
-    while ((rght(i) < h.size()) && ((h[i].first > h[lft(i)].first) || (h[i].first > h[rght(i)].first)))  {
-        temp = h[i];
-        if (h[lft(i)].first < h[rght(i)].first) {
-            h[i] = h[lft(i)];
-            h[lft(i)] = temp;
-            i = lft(i);
+    while ((right(i) < h.size()) && ((h[i].first > h[left(i)].first) || (h[i].first > h[right(i)].first)))  {
+        if (h[left(i)].first < h[right(i)].first) {
+            swap(i, left(i));
+            i = left(i);
         }
         else {
-            h[i] = h[rght(i)];
-            h[rght(i)] = temp;
-            i = rght(i);
+            swap(i, right(i));
+            i = right(i);
         }
     }
-    if ((lft(i) < h.size()) && (h[i].first > h[lft(i)].first)) {
-        temp = h[i];
-        h[i] = h[lft(i)];
-        h[lft(i)] = temp;
+    if ((left(i) < h.size()) && (h[i].first > h[left(i)].first)) {
+        swap(i, left(i));
     }
     return;
 }
@@ -46,8 +50,7 @@ void Minheap::percdown(int i) {
 void Minheap::percup(int i) {
     pair<int, int> temp = h[i];
     while ((h[i].first < h[parent(i)].first) && (i != -1)) {
-        h[i] = h[parent(i)];
-        h[parent(i)] = temp;
+        swap(i, parent(i);
         i = parent(i);
     }
     return;
@@ -75,4 +78,62 @@ void Minheap::delmin() {
         percdown(0);
     }
 }
+
+bool Minheap::isempty() {
+    if (h.size() == 0) {
+        return true;
+    }
+    else return false;
+}
+
+int Minheap::minnode() {
+    return h[0].second;
+}
+
+MST prims(Minheap hp, AdjList al) {
+    MST tree;
+    int i = 0;
+    while (hp.isempty() == false) {
+        hp.heapify();
+        // put min of heap into tree
+        int min = hp.minnode()
+        tree.currnodes[i] = min;
+        i++;
+        // delete min
+        hp.delmin();
+        // update the key in the heap for nodes adjacent to deleted min
+        std::map<int, int>::iterator it;
+        for (it = al.adj[min].begin(); it != al.adj[min].end(); ++it) {
+            
+        }
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
