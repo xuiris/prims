@@ -20,11 +20,11 @@ int Minheap::right(int i) {
     return (2*i)+2;
 }
 
-void swap(int a, int b) {
+void Minheao::swap(int a, int b) {
     //swap
     pair<int, int> temp = h[a];
     h[a] = h[b];
-    h[b] = h[a];
+    h[b] = temp;
     //update index
     index[h[a].second] = a;
     index[h[b].second] = b;
@@ -50,7 +50,7 @@ void Minheap::percdown(int i) {
 void Minheap::percup(int i) {
     pair<int, int> temp = h[i];
     while ((h[i].first < h[parent(i)].first) && (i != -1)) {
-        swap(i, parent(i);
+        swap(i, parent(i));
         i = parent(i);
     }
     return;
@@ -92,9 +92,9 @@ int Minheap::minnode() {
 }
              
 int AdjList::firstcost() {
-    std::map<int, int>::iterator it = al.adj[1].begin();
+    std::map<int, int>::iterator it = adj[1].begin();
     int min = it->second;
-    for (it = it+1; it != al.adj[1].end(); ++it) {
+    for (it = it++; it != adj[1].end(); ++it) {
         if (it->second < min) {
             min = it->second;
         }
@@ -110,7 +110,7 @@ MST prims(Minheap hp, AdjList al) {
     while (hp.isempty() == false) {
         hp.heapify();
         // put min of heap into tree
-        int min = hp.minnode()
+        int min = hp.minnode();
         tree.currnodes[i] = min;
         i++;
         // delete min
@@ -122,37 +122,12 @@ MST prims(Minheap hp, AdjList al) {
             node = it->first;
             cost = it->second;
             // change key to new cost only if old cost was larger
-            if (hp[index[node]].first > cost) {
-                hp[index[node]].first = cost;
+            if (hp.h[hp.index[node]].first > cost) {
+                hp.h[hp.index[node]].first = cost;
             }
         }
     }
     return tree;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

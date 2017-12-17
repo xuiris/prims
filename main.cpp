@@ -45,8 +45,9 @@ int main(int argc, char* argv[]) {
         if (command == "PRIMS") {
             Minheap heap;
             AdjList alist;
+            int i = 0;
             // put all the triples (node node cost) into adjlists and heap
-            for(string frm, string to, string cost, int i = 0; ss >> frm >> to >> cost;) {
+            for(string frm, to, cost; ss >> frm >> to >> cost;) {
                 int f = stoi(frm);
                 int t = stoi(to);
                 int c = stoi(cost);
