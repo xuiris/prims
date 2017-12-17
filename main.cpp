@@ -13,6 +13,7 @@
 #include <iostream>
 #include <sstream>
 #include "prims.hpp"
+#include <limits>
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -54,23 +55,23 @@ int main(int argc, char* argv[]) {
                 // add to heap: (check if the node exists yet in the adj list)
                 if (alist.count(f) == 0) {
                     if (f == 1) {
-                        heap.h[i] = (0, 1);
+                        heap.h[i] = make_pair(0, 1);
                     }
-                    else heap.h[i] = (std::numeric_limits<int>::max(), f);
-                    index[f] = i; // keep track of indexing
+                    else heap.h[i] = make_pair(std::numeric_limits<int>::max(), f);
+                    heap.index[f] = i; // keep track of indexing
                     i++;
                 }
-                if (alist.count(t) == 0) {
+                if (alist.adj.count(t) == 0) {
                     if (t == 1) {
-                        heap.h[i] = (0, 1);
+                        heap.h[i] = make_pair(0, 1);
                     }
-                    else heap.h[i] = (std::numeric_limits<int>::max(), t);
-                    index[t] = i; // keep track of indexing
+                    else heap.h[i] = make_pair(std::numeric_limits<int>::max(), t);
+                    heap.index[t] = i; // keep track of indexing
                     i++;
                 }
                 // add to adj list:
-                alist.adj[f] = (t, c);
-                alist.adj[t] = (f, c);
+                alist.adj[f][t] = c;
+                alist.adj[t][f] = c;
             }
         }
         cout << alist.firstcost() << endl;

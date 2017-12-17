@@ -20,7 +20,7 @@ int Minheap::right(int i) {
     return (2*i)+2;
 }
 
-void Minheao::swap(int a, int b) {
+void Minheap::swap(int a, int b) {
     //swap
     pair<int, int> temp = h[a];
     h[a] = h[b];
