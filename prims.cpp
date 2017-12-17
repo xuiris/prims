@@ -110,13 +110,11 @@ void MST::printmst() {
 
 MST prims(Minheap hp, AdjList al) {
     MST tree;
-    int i = 0;
     while (hp.isempty() == false) {
         hp.heapify();
         // put min of heap into tree
         int min = hp.minnode();
-        tree.currnodes[i] = min;
-        i++;
+        tree.currnodes.push_back(min);
         // delete min
         hp.delmin();
         // update the key in the heap for nodes adjacent to deleted min
