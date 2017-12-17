@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
             heap.printheap();
             cout<< endl;
         }
-        if (command == "PRIMS") {
+        if (command == "PRIM") {
             Minheap heap;
             AdjList alist;
             int i = 0;
@@ -55,17 +55,25 @@ int main(int argc, char* argv[]) {
                 // add to heap: (check if the node exists yet in the adj list)
                 if (alist.adj.count(f) == 0) {
                     if (f == 1) {
-                        heap.h[i] = make_pair(0, 1);
+                        pair<int,int> p = make_pair(0,1);
+                        heap.h[i] = p;
                     }
-                    else heap.h[i] = make_pair(std::numeric_limits<int>::max(), f);
+                    else {
+                        pair<int,int> p = make_pair(std::numeric_limits<int>::max(), f);
+                        heap.h[i] = p;
+                    }
                     heap.index[f] = i; // keep track of indexing
                     i++;
                 }
                 if (alist.adj.count(t) == 0) {
                     if (t == 1) {
-                        heap.h[i] = make_pair(0, 1);
+                        pair<int,int> p = make_pair(0,1);
+                        heap.h[i] = p;
                     }
-                    else heap.h[i] = make_pair(std::numeric_limits<int>::max(), t);
+                    else {
+                        pair<int,int> p = make_pair(std::numeric_limits<int>::max(), t);
+                        heap.h[i] = p;
+                    }
                     heap.index[t] = i; // keep track of indexing
                     i++;
                 }
