@@ -73,7 +73,8 @@ void Minheap::delmin() {
         h.clear();
     }
     else {
-        h[0] = h[h.size()-1];
+        swap(0, h.size()-1);
+        index.erase(h[h.size()-1].second); //delete index from index list
         h.erase(h.end()-1);
         percdown(0);
     }
@@ -89,6 +90,19 @@ bool Minheap::isempty() {
 int Minheap::minnode() {
     return h[0].second;
 }
+             
+int AdjList::firstcost() {
+    std::map<int, int>::iterator it = al.adj[1].begin();
+    int min = it->second;
+    for (it = it+1; it != al.adj[1].end(); ++it) {
+        if (it->second < min) {
+            min = it->second;
+        }
+    }
+    return min;
+}
+             
+                 
 
 MST prims(Minheap hp, AdjList al) {
     MST tree;
@@ -103,12 +117,17 @@ MST prims(Minheap hp, AdjList al) {
         hp.delmin();
         // update the key in the heap for nodes adjacent to deleted min
         std::map<int, int>::iterator it;
+        int node, cost;
         for (it = al.adj[min].begin(); it != al.adj[min].end(); ++it) {
-            
+            node = it->first;
+            cost = it->second;
+            // change key to new cost only if old cost was larger
+            if (hp[index[node]].first > cost) {
+                hp[index[node]].first = cost;
+            }
         }
-    
-    
-    
+    }
+    return tree;
 }
 
 

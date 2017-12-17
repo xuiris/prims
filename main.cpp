@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
                     if (f == 1) {
                         heap.h[i] = (0, 1);
                     }
-                    else heap.h[i] = (infinity, f);
+                    else heap.h[i] = (std::numeric_limits<int>::max(), f);
                     index[f] = i; // keep track of indexing
                     i++;
                 }
@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
                     if (t == 1) {
                         heap.h[i] = (0, 1);
                     }
-                    else heap.h[i] = (infinity, t);
+                    else heap.h[i] = (std::numeric_limits<int>::max(), t);
                     index[t] = i; // keep track of indexing
                     i++;
                 }
