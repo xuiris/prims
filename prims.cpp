@@ -102,7 +102,11 @@ int AdjList::firstcost() {
     return min;
 }
              
-                 
+void MST::printmst() {
+    for (std::vector<int>::const_iterator i = currnodes.begin(); i != currnodes.end(); ++i) {
+        std::cout << *i << " ";
+    }
+}
 
 MST prims(Minheap hp, AdjList al) {
     MST tree;
