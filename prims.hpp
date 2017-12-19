@@ -29,7 +29,7 @@ struct Minheap {
     void printheap();
     void delmin();
     bool isempty();
-    int minnode()
+    int minnode();
 };
 
 struct Graph {
