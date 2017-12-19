@@ -29,23 +29,21 @@ struct Minheap {
     void printheap();
     void delmin();
     bool isempty();
-    int minnode();
 };
 
-struct AdjList {
-    map<int, map<int, int>> adj; // <node, <adjacent node, cost>>
+struct Graph {
+    map<int, map<int, int>> adj; // Adjacency list <node, <adjacent node, cost>>
+    map<int, pair<int, int>> edges; // all edges in graph <cost, <small node, big node>>
     int firstcost(); // gives the min cost for edge connected to node 1
 };
 
 struct MST {
-    vector<int> currnodes;
+    vector<pair<int,int>> mst_edges;
     void printmst();
 };
 
-MST prims(Minheap hp, AdjList al); //minheap contains all nodes with min as node1 and correct key, all other nodes key = inf
+MST prims(Minheap hp, Graph al); //minheap contains all nodes with min as node1 and correct key, all other nodes key = inf
                                    //adjlist has all the nodes within the graph
-
-
 
 
 

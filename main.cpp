@@ -45,14 +45,14 @@ int main(int argc, char* argv[]) {
         }
         if (command == "PRIM") {
             Minheap heap;
-            AdjList alist;
-            // put all the triples (node node cost) into adjlists and heap
+            Graph alist;
+            // put all the triples (node node cost) into Graph (adj list, edges) and heap
             for(string frm, to, cost; ss >> frm >> to >> cost;) {
                 int f = stoi(frm);
                 int t = stoi(to);
                 int c = stoi(cost);
-                // add to heap: (check if the node exists yet in the adj list)
-                if (alist.adj.count(f) == 0) {
+                // FIRST add to heap: (check if the node exists yet in the adj list)
+                if (graph.adj.count(f) == 0) {
                     if (f == 1) {
                         heap.h.push_back(make_pair(0,1));
                     }
@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
                     }
                     heap.index[f] = heap.h.size()-1; // keep track of indexing
                 }
-                if (alist.adj.count(t) == 0) {
+                if (graph.adj.count(t) == 0) {
                     if (t == 1) {
                         heap.h.push_back(make_pair(0,1));
                     }
@@ -70,12 +70,17 @@ int main(int argc, char* argv[]) {
                     }
                     heap.index[t] = heap.h.size()-1; // keep track of indexing
                 }
-                // add to adj list:
-                alist.adj[f][t] = c;
-                alist.adj[t][f] = c;
+                // SECOND add to adj list:
+                graph.adj[f][t] = c;
+                graph.adj[t][f] = c;
+                // THIRD add to edges:
+                if (f < t) {
+                    graph.edges[c] = make_pair(f, t);
+                }
+                else graph.edges[c] = make_pair(t, f);
             }
-            cout << alist.firstcost() << endl;
-            MST mytree = prims(heap, alist);
+            cout << graph.firstcost() << endl;
+            MST mytree = prims(heap, graph);
             mytree.printmst();
             cout << endl;
         }

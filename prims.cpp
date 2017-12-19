@@ -86,12 +86,8 @@ bool Minheap::isempty() {
     }
     else return false;
 }
-
-int Minheap::minnode() {
-    return h[0].second;
-}
              
-int AdjList::firstcost() {
+int Graph::firstcost() {
     std::map<int, int>::iterator it = adj[1].begin();
     int min = it->second;
     for (it = it++; it != adj[1].end(); ++it) {
@@ -103,24 +99,24 @@ int AdjList::firstcost() {
 }
              
 void MST::printmst() {
-    for (std::vector<int>::const_iterator i = currnodes.begin(); i != currnodes.end(); ++i) {
-        std::cout << *i << " ";
+    for (std::vector<int>::const_iterator i = mst_edges.begin(); i != mst_edges.end(); ++i) {
+        cout << i->first << " " << i->second << " ";
     }
 }
 
-MST prims(Minheap hp, AdjList al) {
+MST prims(Minheap hp, Graph gr) {
     MST tree;
     while (hp.isempty() == false) {
         hp.heapify();
         // put min of heap into tree
-        int min = hp.minnode();
-        tree.currnodes.push_back(min);
+        pair<int,int> minedge = gr.edges[hp.h[0].first];
+        tree.mst_edges.push_back(minedge);
         // delete min
         hp.delmin();
         // update the key in the heap for nodes adjacent to deleted min
         std::map<int, int>::iterator it;
         int node, cost;
-        for (it = al.adj[min].begin(); it != al.adj[min].end(); ++it) {
+        for (it = gr.adj[min].begin(); it != gr.adj[min].end(); ++it) {
             node = it->first;
             cost = it->second;
             // change key to new cost only if old cost was larger
