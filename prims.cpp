@@ -126,13 +126,13 @@ MST prims(Minheap hp, Graph gr) {
             node = it->first;
             cost = it->second;
             // for nodes not in mst: change key to new cost only if old cost was larger
-            if ((inmst(node) == false) && (hp.h[hp.index[node]].first > cost)) {
+            if ((tree.inmst(node) == false) && (hp.h[hp.index[node]].first > cost)) {
                 hp.h[hp.index[node]].first = cost;
             }
         }
         hp.heapify();
         // put min of heap into tree. Check emptiness again since we deleted from heap in this loop.
-        if (hp.isempty == false) {
+        if (hp.isempty() == false) {
             pair<int,int> minedge = gr.edges[hp.h[0].first];
             tree.mst_edges.push_back(minedge);
         }
