@@ -111,6 +111,7 @@ void MST::printmst() {
 MST prims(Minheap hp, Graph gr) {
     MST tree;
     while (hp.isempty() == false) {
+        int min = hp.minnode();
         // delete min
         hp.delmin();
         // update the key in the heap for nodes adjacent to deleted min
@@ -128,7 +129,6 @@ MST prims(Minheap hp, Graph gr) {
         // put min of heap into tree
         pair<int,int> minedge = gr.edges[hp.h[0].first];
         tree.mst_edges.push_back(minedge);
-        int min = hp.minnode();
     }
     return tree;
 }
