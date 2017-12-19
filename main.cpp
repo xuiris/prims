@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
         }
         if (command == "PRIM") {
             Minheap heap;
-            Graph alist;
+            Graph graph;
             // put all the triples (node node cost) into Graph (adj list, edges) and heap
             for(string frm, to, cost; ss >> frm >> to >> cost;) {
                 int f = stoi(frm);

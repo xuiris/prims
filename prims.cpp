@@ -99,7 +99,7 @@ int Graph::firstcost() {
 }
              
 void MST::printmst() {
-    for (std::vector<int>::const_iterator i = mst_edges.begin(); i != mst_edges.end(); ++i) {
+    for (std::vector<pair<int,int>>::const_iterator i = mst_edges.begin(); i != mst_edges.end(); ++i) {
         cout << i->first << " " << i->second << " ";
     }
 }
