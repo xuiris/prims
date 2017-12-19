@@ -131,9 +131,11 @@ MST prims(Minheap hp, Graph gr) {
             }
         }
         hp.heapify();
-        // put min of heap into tree
-        pair<int,int> minedge = gr.edges[hp.h[0].first];
-        tree.mst_edges.push_back(minedge);
+        // put min of heap into tree. Check emptiness again since we deleted from heap in this loop.
+        if (hp.isempty == false) {
+            pair<int,int> minedge = gr.edges[hp.h[0].first];
+            tree.mst_edges.push_back(minedge);
+        }
     }
     return tree;
 }
