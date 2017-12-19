@@ -14,6 +14,7 @@
 #include <utility>
 #include <iostream>
 #include <map>
+#include <set>
 using namespace std;
 
 struct Minheap {
@@ -40,6 +41,8 @@ struct Graph {
 
 struct MST {
     vector<pair<int,int>> mst_edges;
+    set<int> currnodes;
+    bool inmst(int i);
     void printmst();
 };
 

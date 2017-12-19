@@ -108,20 +108,25 @@ void MST::printmst() {
     }
 }
 
+bool MST::inmst(int i) {
+    return currnodes.count(i);
+}
+
 MST prims(Minheap hp, Graph gr) {
     MST tree;
     while (hp.isempty() == false) {
         int min = hp.minnode();
+        tree.currnodes.insert(min);
         // delete min
         hp.delmin();
-        // update the key in the heap for nodes adjacent to deleted min
+        // update the key in the heap for nodes adjacent to deleted min and NOT in mst
         std::map<int, int>::iterator it;
         int node, cost;
         for (it = gr.adj[min].begin(); it != gr.adj[min].end(); ++it) {
             node = it->first;
             cost = it->second;
-            // change key to new cost only if old cost was larger
-            if (hp.h[hp.index[node]].first > cost) {
+            // for nodes not in mst: change key to new cost only if old cost was larger
+            if ((inmst(node) == false) && (hp.h[hp.index[node]].first > cost)) {
                 hp.h[hp.index[node]].first = cost;
             }
         }
